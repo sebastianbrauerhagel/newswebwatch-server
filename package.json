@@ -1,0 +1,19 @@
+{
+  "name": "newsweb-monitor-server",
+  "version": "1.0.0",
+  "description": "Standalone 24/7 poller for Oslo Børs NewsWeb that pushes Teams notifications per desk and exposes a read-only dashboard API.",
+  "type": "module",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

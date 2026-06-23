@@ -1,0 +1,81 @@
+{
+  "_comment": "Copy this file to desks-config.json and fill in each desk's teamsWebhookUrl. desks-config.json is git-ignored because the webhook URLs are secrets. One webhook per desk. keywords are matched EXACTLY against a message's issuerSign (ticker) — never as a substring of the title. ignoreWords are matched as case-insensitive substrings against title+issuerSign+issuerName and suppress an otherwise-matching message.",
+  "desks": {
+    "finanswatch": {
+      "label": "FinansWatch",
+      "teamsWebhookUrl": "",
+      "keywords": [
+        "AASB", "AGDER", "ANSB", "ASKSB", "AURG",
+        "ACR", "B2I", "BESB", "BIEN", "BJSP", "BLSB", "BNB", "BOSB",
+        "DDB", "DNB", "DNBNB",
+        "EIKA", "EIKB", "EIKR",
+        "FFSB", "FRSK", "FSB", "FSBKR", "FTFOR",
+        "GJF", "GRONG", "GRSB",
+        "HDSB", "HEBK", "HELG", "HESB", "HGSB", "HJSB",
+        "INSTA", "JAREN", "JESB",
+        "KDSB", "KLPB", "KLPBK", "KLPKK", "KOMB", "KRAB",
+        "LAFO", "LAKRB", "LANBK", "LEAB", "LISB", "LOSB", "LSSB", "LUSB",
+        "MELG", "MESB", "MING", "MOBAN", "MOBK", "MORG",
+        "NAEB", "NASB", "NDA", "NISB", "NOFIN", "NOKR", "NONG",
+        "OBBK", "OBOSBK", "ODAL", "OPSB", "ORKSP", "ORLSB", "ORSP",
+        "PARB", "PROT", "REBA", "RING", "ROGBO", "ROGS", "ROMER", "ROSB",
+        "SANC", "SB1NO", "SB68", "SBGG", "SBHA", "SBNK", "SBNOB", "SBNOR",
+        "SFSB", "SKASB", "SKUE", "SNOR", "SOAG", "SOGSB", "SPBKR", "SPOBK",
+        "SPOG", "SPOL", "SPSK", "SRBOL", "SRSB", "STB", "STORB", "STORK", "STORL", "STSB",
+        "TINDE", "TOLG", "TOSB", "TRGSB", "TRSB", "TRYG", "TYSB",
+        "VALSB", "VASB", "VEBK", "VOSSB", "VVL"
+      ],
+      "ignoreWords": ["rentefastsettelse"]
+    },
+    "techwatch": {
+      "label": "TechWatch",
+      "teamsWebhookUrl": "",
+      "keywords": [
+        "ATEA", "AUTO", "BOUV", "CONTX", "IDEX", "ITERA", "KIT",
+        "LINK", "NOD", "NORBT", "OMDA", "PEXIP", "STRO", "SWON",
+        "TECH", "TEL", "WSTEP", "ZAL", "ZAP"
+      ],
+      "ignoreWords": []
+    },
+    "energiwatch": {
+      "label": "EnergiWatch",
+      "teamsWebhookUrl": "",
+      "keywords": [
+        "AKRBP", "AKER", "AKSO", "BONHR", "BORR", "BWE", "BWLPG", "BWO",
+        "CADLR", "CLOUD", "DNO", "DOFG", "ELK", "ELMRA", "EQNR",
+        "FRO", "HAFNI", "HAUTO", "HPUR", "HYPRO", "IPC",
+        "MGN", "MPCES", "NEL", "ODF", "ODL", "OET", "OKEA",
+        "OTOVO", "PEN", "REACH", "RECSI", "SCATC", "SNI",
+        "SUBC", "TGS", "TORM", "VAR", "VOW", "WAWI", "YAR"
+      ],
+      "ignoreWords": []
+    },
+    "eiendomswatch": {
+      "label": "EiendomsWatch",
+      "teamsWebhookUrl": "",
+      "keywords": ["AFG", "BNORE", "ENTRA", "MULTI", "NORCO", "NPRO", "NRC", "OBOS", "OLT", "SBO", "VEI"],
+      "ignoreWords": []
+    },
+    "handelswatch": {
+      "label": "HandelsWatch",
+      "teamsWebhookUrl": "",
+      "keywords": ["ELO", "EPR", "GYL", "KID", "KOMPL", "POL", "SATS", "STRO", "TOM", "ZAL"],
+      "ignoreWords": []
+    },
+    "matvarewatch": {
+      "label": "MatvareWatch",
+      "teamsWebhookUrl": "",
+      "keywords": ["ABTEC", "AUSS", "BAKKA", "GSF", "HBC", "HOFIN", "LSG", "MOWI", "ORK", "SALM"],
+      "ignoreWords": []
+    },
+    "medwatch": {
+      "label": "MedWatch",
+      "teamsWebhookUrl": "",
+      "keywords": [
+        "CRNA", "ELABS", "EXTX", "GENT", "LYTIX", "MEDI", "NAVA", "NYKD",
+        "OMDA", "ONCIN", "PHO", "TRMED", "VISTN"
+      ],
+      "ignoreWords": []
+    }
+  }
+}

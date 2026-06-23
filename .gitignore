@@ -1,0 +1,11 @@
+node_modules/
+
+# Runtime data (SQLite DB lives here)
+data/
+
+# Real desk config holds secret Teams webhook URLs — never commit it.
+desks-config.json
+
+# Local env
+.env
+*.log

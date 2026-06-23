@@ -1542,56 +1542,14 @@
     </div>
 
     <div class="sidebar-mini" id="sidebar-mini">
-      <span class="sidebar-mini-kw" id="sidebar-mini-kw" title="Aktive søkeord">0</span>
-      <span class="sidebar-mini-icon" id="sidebar-mini-sound" title="Lydvarsel">♪</span>
-      <span class="sidebar-mini-dot" id="sidebar-mini-teams" title="Teams"></span>
+      <span class="sidebar-mini-icon" id="sidebar-mini-sound" title="Lydvarsel (valgfritt)">♪</span>
     </div>
 
     <div class="sidebar-block">
-      <div class="sidebar-title">Søkeord</div>
-      <div class="kw-dropdown" id="kw-dropdown">
-        <div class="kw-summary" id="kw-summary">
-          <div class="kw-summary-left">
-            <span class="kw-count-badge" id="kw-count-badge">0</span>
-            <span class="kw-summary-label">søkeord aktive</span>
-          </div>
-          <span class="kw-chevron">▾</span>
-        </div>
-        <div class="kw-panel">
-          <div class="kw-search-row">
-            <input class="kw-search-input" id="keyword-input" placeholder="Søk ticker eller navn…" autocomplete="off" />
-          </div>
-          <div class="kw-suggestions" id="kw-suggestions"></div>
-          <div class="kw-tag-scroll" id="keyword-list"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-block">
-      <div class="sidebar-title">Ignorer hvis inneholder</div>
-      <div class="ignore-list" id="ignore-list"></div>
-      <div class="kw-add">
-        <input class="kw-input" type="text" id="ignore-input" placeholder="f.eks. rentefastsettelse" maxlength="60" />
-        <button class="kw-btn" id="add-ignore-btn" style="background:rgba(242,87,87,0.08);border-color:rgba(242,87,87,0.2);color:#f28787;" title="Legg til">+</button>
-      </div>
-    </div>
-
-    <div class="sidebar-block">
-      <div class="sidebar-title">Teams-varsel</div>
-      <div style="margin-bottom:8px">
-        <input class="kw-input" type="text" id="teams-input" placeholder="Lim inn webhook-URL…" style="width:100%;font-size:10px;padding:6px 8px;" />
-        <div id="teams-masked" class="teams-masked">
-          <span class="teams-masked-dot">●</span>
-          <span id="teams-masked-host" class="teams-masked-host"></span>
-          <button class="teams-reveal-btn" id="teams-reveal-btn">Endre</button>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
-        <div style="display:flex;gap:6px">
-          <button class="kw-btn" id="teams-save-btn" style="width:auto;padding:0 12px;font-size:11px;font-family:var(--mono);">Lagre</button>
-          <button class="kw-btn" id="teams-test-btn" style="width:auto;padding:0 12px;font-size:11px;font-family:var(--mono);background:rgba(232,201,110,0.06);border-color:rgba(232,201,110,0.15);">Test</button>
-        </div>
-        <span id="teams-status" style="font-family:var(--mono);font-size:10px;color:var(--sidebar-2)"></span>
+      <div class="sidebar-title">Søkeord <span id="kw-count-badge" style="font-family:var(--mono);font-size:10px;color:var(--sidebar-accent);margin-left:4px;"></span></div>
+      <div class="status-info" style="line-height:1.6">
+        Søkeord og Teams-varsel for denne desken styres nå sentralt på serveren — varsler sendes <strong style="color:var(--sidebar-accent)">uten at denne fanen er åpen</strong>.
+        Endringer i en desk sin liste gjøres av <strong>Joakim Kroken Aarseth</strong>. Se full liste under «Ticker-oversikt».
       </div>
     </div>
 
@@ -1603,7 +1561,10 @@
     </div>
 
     <div class="sidebar-block">
-      <div class="sidebar-title">Varsler</div>
+      <div class="sidebar-title">Varsler <span style="font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:0.06em;color:var(--sidebar-2);border:1px solid var(--sidebar-border);border-radius:2px;padding:1px 5px;margin-left:4px;">VALGFRITT</span></div>
+      <div class="status-info" style="margin-bottom:8px;line-height:1.5">
+        Teams-varsler går automatisk fra serveren. Lyd og blink under er kun ekstra hjelp når du har fanen åpen.
+      </div>
       <div class="toggle-row">
         <span class="toggle-label">🔔 Browser push</span>
         <label class="toggle">
@@ -1634,7 +1595,7 @@
     <div class="sidebar-block">
       <div class="sidebar-title">Status</div>
       <div class="status-info" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <span>Interval <strong id="interval-display">15s</strong> · proxy</span>
+        <span>Oppdaterer <strong id="interval-display">15s</strong> · server</span>
       </div>
       <input type="range" id="poll-slider" min="5" max="60" step="5" value="15"
         style="width:100%;margin-bottom:8px;accent-color:var(--sidebar-accent);cursor:pointer;opacity:0.85;" />
@@ -1683,7 +1644,7 @@
   </div>
   <div class="ticker-body">
     <div class="ticker-info-box">
-      Standardlistene vedlikeholdes av <strong>Joakim Kroken Aarseth</strong>. Ta kontakt for å legge til eller fjerne selskaper fra en desk sin standardliste. Tickers du selv legger til via søkefeltet i monitoren lagres kun lokalt i din nettleser og gjelder ikke for andre brukere.
+      Watchlistene vedlikeholdes sentralt på serveren av <strong>Joakim Kroken Aarseth</strong>. Ta kontakt for å legge til eller fjerne selskaper fra en desk sin liste. Tallet bak hver ticker viser antall børsmeldinger registrert i dag.
     </div>
     <div id="ticker-content"></div>
   </div>
@@ -1694,22 +1655,14 @@
 <div class="modal-backdrop hidden" id="modal">
   <div class="modal" style="width:480px">
     <div class="modal-logo">NEWS<span>WEB</span> MONITOR</div>
-    <div class="modal-sub">Oppsett · Velg desk</div>
+    <div class="modal-sub">Velg desk</div>
 
     <div class="modal-step">
       <div class="modal-step-num">1</div>
       <div class="modal-step-text">
-        <strong>Hvilken desk jobber du på?</strong><br>
+        <strong>Hvilken desk vil du følge?</strong><br>
+        <span style="color:var(--text-3);font-size:12px;">Du ser dagens treff for desken du velger. Teams-varsler sendes automatisk fra serveren — uavhengig av denne fanen.</span>
         <div id="profile-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;"></div>
-      </div>
-    </div>
-
-    <div class="modal-step">
-      <div class="modal-step-num" style="background:var(--surface-2);border-color:var(--border);color:var(--text-3);">2</div>
-      <div class="modal-step-text">
-        Sett opp <strong>Teams-varsel</strong> <span style="font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:0.08em;color:var(--text-3);border:1px solid var(--border);border-radius:2px;padding:1px 5px;vertical-align:middle;">VALGFRITT</span><br>
-        Teams → kanal/chat → <strong>···</strong> → <strong>Arbeidsflyter</strong> → søk "webhook" → <em>"Send webhook-varsler til en chat"</em> → kopier URL<br>
-        <input class="modal-input" type="text" id="modal-webhook-input" placeholder="https://prod-xx.westeurope.logic.azure.com/workflows/..." />
       </div>
     </div>
 
@@ -1785,41 +1738,36 @@
         </div>
         <div class="t-step">
           <div class="t-step-num">3</div>
-          <div class="t-step-text">Velg din desk fra listen (f.eks. <strong>FinansWatch</strong>). Søkeordene lastes automatisk.</div>
+          <div class="t-step-text">Velg desken du vil følge (f.eks. <strong>FinansWatch</strong>). Du ser dagens treff for den desken. Du kan bytte desk når som helst.</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 3: Steg 2 Teams -->
+    <!-- Slide 3: Hvordan varslene fungerer -->
     <div class="tutorial-slide">
       <div class="t-label">Microsoft Teams</div>
-      <div class="t-title">Steg 2 | Sett opp Teams-varsel</div>
+      <div class="t-title">Slik fungerer Teams-varslene</div>
       <hr class="t-rule">
       <div class="t-grid">
         <div class="t-grid-item">
           <div class="t-grid-num">01</div>
-          <div class="t-grid-title">Lag Team</div>
-          <div class="t-grid-text">Åpne Teams og lag et Team. Vårt (FinansWatch) heter «NewsWebWatch FW». Kontakt Joakim om du er usikker.</div>
+          <div class="t-grid-title">Serveren overvåker</div>
+          <div class="t-grid-text">En server kjører døgnet rundt og sjekker Oslo Børs hvert 15. sekund — helt uavhengig av om noen har appen åpen.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">02</div>
-          <div class="t-grid-title">Åpne Arbeidsflyter</div>
-          <div class="t-grid-text">Klikk på <strong>···</strong> ved siden av kanalnavnet og velg <strong>Arbeidsflyter</strong>.</div>
+          <div class="t-grid-title">Matcher mot desken</div>
+          <div class="t-grid-text">Hver melding sjekkes mot tickerlisten til hver desk. Treff på en ticker utløser et varsel for den desken.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">03</div>
-          <div class="t-grid-title">Søk på webhook</div>
-          <div class="t-grid-text">Søk etter «webhook» og velg <em>«Send webhook-varsler til en kanal»</em>.</div>
+          <div class="t-grid-title">Sender til Teams</div>
+          <div class="t-grid-text">Varselet sendes direkte til desken sin egen Teams-kanal. Hver desk har én webhook, satt opp én gang av Joakim.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">04</div>
-          <div class="t-grid-title">Kopier URL-en</div>
-          <div class="t-grid-text">Følg veiviseren, velg team og kanal, og kopier webhook-URL-en du får på slutten.</div>
-        </div>
-        <div class="t-grid-item" style="grid-column:span 2">
-          <div class="t-grid-num">05</div>
-          <div class="t-grid-title">Lim inn i appen</div>
-          <div class="t-grid-text">Finn <strong>Teams-varsel</strong> i sidepanelet, lim inn URL og trykk <strong>Lagre</strong>. Trykk <strong>Test</strong> for å bekrefte at varselet fungerer.</div>
+          <div class="t-grid-title">Ingenting å sette opp</div>
+          <div class="t-grid-text">Du trenger ikke lime inn webhook eller holde fanen åpen. Denne siden er kun et oppslagsvindu for dagens treff.</div>
         </div>
       </div>
     </div>
@@ -1832,23 +1780,23 @@
       <table class="t-table">
         <tr>
           <td>Desk</td>
-          <td>Velg hvilken Watch-desk du tilhører. Bytter du desk lastes nye søkeord og dagens treff automatisk.</td>
+          <td>Velg hvilken Watch-desk du vil følge. Bytter du desk lastes dagens treff for den desken automatisk.</td>
         </tr>
         <tr>
           <td>Søkeord</td>
-          <td>Viser antall aktive tickers. Klikk for å åpne og søke etter selskaper du vil legge til manuelt. Nye søkeord lagres lokalt – endringer i standardliste må via Joakim for å gjelde alle.</td>
+          <td>Viser antall tickers desken overvåker. Listen styres sentralt på serveren – endringer går via Joakim.</td>
         </tr>
         <tr>
-          <td>Ignorer</td>
-          <td>Meldinger som inneholder det gitte ordet filtreres bort fra feeden.</td>
+          <td>Ticker-oversikt</td>
+          <td>Åpner full liste over alle tickers per desk, med dagens aktivitet. Hentes live fra serveren.</td>
         </tr>
         <tr>
-          <td>Teams-varsel</td>
-          <td>Lim inn webhook-URL her. Trykk <strong>Test</strong> for å verifisere at varsler fungerer.</td>
+          <td>Varsler</td>
+          <td>Lyd og blink er valgfritt og krever åpen fane. Teams-varslene sendes uansett fra serveren.</td>
         </tr>
         <tr>
           <td>I dag</td>
-          <td>Antall treff siden midnatt. Nullstilles automatisk neste dag.</td>
+          <td>Antall treff for valgt desk siden midnatt. Nullstilles automatisk neste dag.</td>
         </tr>
       </table>
     </div>
@@ -1869,11 +1817,11 @@
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">03</div>
-          <div class="t-grid-text">Standardlister vedlikeholdes av <strong>Joakim Kroken Aarseth</strong>.</div>
+          <div class="t-grid-text">Watchlistene vedlikeholdes sentralt av <strong>Joakim Kroken Aarseth</strong>.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">04</div>
-          <div class="t-grid-text">Egne tickers lagres kun lokalt og gjelder ikke for andre brukere.</div>
+          <div class="t-grid-text">Tallet bak hver ticker viser antall børsmeldinger registrert i dag.</div>
         </div>
       </div>
     </div>
@@ -1885,13 +1833,13 @@
       <div class="t-grid">
         <div class="t-grid-item">
           <div class="t-grid-num">01</div>
-          <div class="t-grid-title">Hold fanen åpen</div>
-          <div class="t-grid-text">Siden må stå åpen i en nettleserfane for at varsler og lyd skal fungere. En åpen fane i bakgrunnen er nok.</div>
+          <div class="t-grid-title">Fanen er valgfri</div>
+          <div class="t-grid-text">Teams-varslene fungerer selv om ingen har denne siden åpen. Lyd og blink er kun ekstra hjelp når du følger med live.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">02</div>
           <div class="t-grid-title">Tre pip betyr treff</div>
-          <div class="t-grid-text">Når et treff kommer hører du tre stigende pip og tab-tittelen blinker. Teams-varsel tar noen sekunder ekstra.</div>
+          <div class="t-grid-text">Har du fanen åpen med lyd på, hører du tre stigende pip og tab-tittelen blinker når et nytt treff dukker opp.</div>
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">03</div>
@@ -1900,8 +1848,8 @@
         </div>
         <div class="t-grid-item">
           <div class="t-grid-num">04</div>
-          <div class="t-grid-title">Webhook er privat</div>
-          <div class="t-grid-text">Teams webhook-URL lagres kun i din nettleser og deles ikke med andre brukere av appen.</div>
+          <div class="t-grid-title">Treff lagres på serveren</div>
+          <div class="t-grid-text">Alle treff lagres i en database, så oversikten er den samme uansett hvem som åpner appen eller når.</div>
         </div>
       </div>
     </div>
@@ -1913,7 +1861,16 @@
 <script>
 let pollMs = parseInt(localStorage.getItem('nwm_poll_ms') || '15000');
 let pollTimer = null;
-const API_URL = '/api/messages';
+
+// ── Server-API ──
+// Dashboarden ligger på Vercel og snakker med den frittstående serveren over HTTPS.
+// Bytt NEWSWEB_DOMAIN til serverens hostname. Kan overstyres med ?api=https://host
+// i URL-en eller window.NWM_API_BASE for testing.
+const API_BASE = (
+  new URLSearchParams(location.search).get('api') ||
+  window.NWM_API_BASE ||
+  'https://NEWSWEB_DOMAIN'
+).replace(/\/+$/, '');
 
 // ── Statisk issuer-map (fra NewsWeb issuers-liste) ──
 const ISSUER_MAP = {
@@ -2153,17 +2110,12 @@ const ISSUER_MAP = {
 };
 
 
-let keywords    = JSON.parse(localStorage.getItem('nwm_keywords') || '[]');
-let ignoreWords = JSON.parse(localStorage.getItem('nwm_ignore') || '[]');
-let kwCustom    = localStorage.getItem('nwm_custom') === '1';
-let kwVersion   = parseInt(localStorage.getItem('nwm_kw_version') || '0');
-let userProfile = localStorage.getItem('nwm_profile') || '';
-let teamsUrl    = localStorage.getItem('nwm_teams') || '';
-let _cachedCfg  = null;
-let seenIds     = new Set(JSON.parse(localStorage.getItem('nwm_seen') || '[]'));
-let allMsgs     = [];   // alle meldinger hentet i dag (for re-rendering ved kw-endring)
-let hitCount    = 0;
-let dailyHitCount = 0;
+// Hvilken desk-feed brukeren ser på (read-only valg). Migrer gamle 'nwm_profile'.
+let userDesk    = localStorage.getItem('nwm_desk') || localStorage.getItem('nwm_profile') || '';
+let seenHitIds  = new Set();   // messageId-er allerede vist i feeden (nullstilles ved desk-bytte)
+let issuerNames = {};          // symbol → selskapsnavn, fylt fra /api/tickers
+let hitCount    = 0;           // treff vist i denne økten (header-teller)
+let dailyHitCount = 0;         // dagens treff for valgt desk
 let pushEnabled  = false;
 let soundEnabled = true;
 let countdownTimer = null;
@@ -2214,206 +2166,62 @@ function playPing() {
 }
 
 // ── Keywords ──
-function saveKeywords() { localStorage.setItem('nwm_keywords', JSON.stringify(keywords)); }
-function saveIgnore() { localStorage.setItem('nwm_ignore', JSON.stringify(ignoreWords)); }
-
-function markCustom() {
-  kwCustom = true;
-  localStorage.setItem('nwm_custom', '1');
+// ── Server data layer (read-only) ──
+async function fetchHits(desk) {
+  const url = `${API_BASE}/api/hits?desk=${encodeURIComponent(desk)}&_=${Date.now()}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  return data.hits || [];
 }
 
-async function fetchConfigRaw() {
-  try {
-    const res = await fetch('/api/config?_=' + Date.now());
-    if (!res.ok) return null;
-    _cachedCfg = await res.json();
-    return _cachedCfg;
-  } catch(e) { return null; }
+async function fetchTickers() {
+  const res = await fetch(`${API_BASE}/api/tickers?_=${Date.now()}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  (data.tickers || []).forEach(t => { if (t.name) issuerNames[t.ticker.toUpperCase()] = t.name; });
+  return data;
 }
 
-async function fetchConfig(profileKey) {
-  if (kwCustom) return;
-  const key = profileKey || userProfile;
-  if (!key) return;
+const hitKey = (msg) => String(msg.messageId || msg.id || '');
 
-  try {
-    const res = await fetch('/api/config?_=' + Date.now());
-    if (!res.ok) return;
-    const cfg = await res.json();
-    const profile = cfg.profiles?.[key];
-    if (!profile) return;
-
-    if (profile.version <= kwVersion) return;
-
-    keywords    = profile.keywords    || keywords;
-    ignoreWords = profile.ignoreWords || ignoreWords;
-    saveKeywords();
-    saveIgnore();
-    localStorage.setItem('nwm_kw_version', String(profile.version));
-    kwVersion = profile.version;
-
-    renderKeywords();
-    renderIgnore();
-    rebuildFeed();
-  } catch(e) {}
-}
-
-async function setProfile(key) {
-  userProfile = key;
-  localStorage.setItem('nwm_profile', key);
-  // Reset versjon så profilen alltid henter ferske defaults
-  kwVersion = 0;
-  kwCustom = false;
-  localStorage.removeItem('nwm_custom');
-  localStorage.setItem('nwm_kw_version', '0');
-  await fetchConfig(key);
-}
-
-function renderKeywords() {
-  const list = document.getElementById('keyword-list');
-  list.innerHTML = '';
-  keywords.forEach((kw, i) => {
-    const tag = document.createElement('div');
-    tag.className = 'kw-tag';
-    const name = getIssuerName(kw);
-    tag.innerHTML = `<span title="${esc(name)}">${esc(kw)}</span><button class="kw-remove" data-i="${i}" title="Fjern">×</button>`;
-    list.appendChild(tag);
+// Last og vis dagens treff for valgt desk (stille – ingen lyd/blink for historikk).
+async function loadDeskFeed() {
+  const hits = await fetchHits(userDesk);
+  hitCount = 0;
+  clearFeedAnimated(() => {
+    hits.forEach(h => seenHitIds.add(hitKey(h)));
+    hits.sort((a, b) => (a.publishedMs || 0) - (b.publishedMs || 0));
+    hits.forEach(msg => addToFeed(msg, true));
+    if (hitCount === 0) showEmptyState();
+    dailyHitCount = hits.length;
+    const dc = document.getElementById('daily-count'); if (dc) dc.textContent = dailyHitCount;
   });
-  list.querySelectorAll('button').forEach(btn =>
-    btn.addEventListener('click', () => {
-      keywords.splice(Number(btn.dataset.i), 1);
-      saveKeywords(); renderKeywords();
-      markCustom(); rebuildFeed();
-    })
-  );
-  // Oppdater badge
-  const badge = document.getElementById('kw-count-badge');
-  if (badge) badge.textContent = keywords.length;
-  updateSidebarMini();
 }
 
-function renderIgnore() {
-  const list = document.getElementById('ignore-list');
-  list.innerHTML = '';
-  ignoreWords.forEach((kw, i) => {
-    const tag = document.createElement('div');
-    tag.className = 'ignore-tag';
-    tag.innerHTML = `${esc(kw)}<button class="ignore-remove" data-i="${i}" title="Fjern">×</button>`;
-    list.appendChild(tag);
-  });
-  list.querySelectorAll('button').forEach(btn =>
-    btn.addEventListener('click', () => {
-      ignoreWords.splice(Number(btn.dataset.i), 1);
-      saveIgnore(); renderIgnore();
-      rebuildFeed();
-    })
-  );
-}
 
-function addIgnore(kw) {
-  kw = kw.trim().toLowerCase();
-  if (!kw || ignoreWords.includes(kw)) return;
-  ignoreWords.push(kw); saveIgnore(); renderIgnore();
-  rebuildFeed();
-}
+// ── Onboarding (read-only desk-valg) ──
+const DESK_LIST = [
+  { key: 'finanswatch',  label: 'FinansWatch' },
+  { key: 'techwatch',    label: 'TechWatch' },
+  { key: 'energiwatch',  label: 'EnergiWatch' },
+  { key: 'eiendomswatch',label: 'EiendomsWatch' },
+  { key: 'handelswatch', label: 'HandelsWatch' },
+  { key: 'medwatch',     label: 'MedWatch' },
+  { key: 'matvarewatch', label: 'MatvareWatch' },
+];
 
-document.getElementById('add-ignore-btn').addEventListener('click', () => {
-  const inp = document.getElementById('ignore-input');
-  addIgnore(inp.value); inp.value = ''; inp.focus();
-});
-document.getElementById('ignore-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') { addIgnore(e.target.value); e.target.value = ''; }
-});
-
-function addKeyword(kw) {
-  kw = kw.trim().toLowerCase();
-  if (!kw || keywords.includes(kw)) return;
-  keywords.push(kw); saveKeywords(); renderKeywords();
-  rebuildFeed();       // legg til evt. treff fra dagens meldinger
-}
-
-// Keyword input håndteres av autocomplete-systemet nedenfor
-
-
-// ── Teams webhook ──
-function setTeamsUrl(val) {
-  teamsUrl = val.trim();
-  localStorage.setItem('nwm_teams', teamsUrl);
-  const inp = document.getElementById('teams-input');
-  const statusEl = document.getElementById('teams-status');
-  if (inp) inp.value = teamsUrl;
-  if (statusEl) {
-    statusEl.textContent = teamsUrl ? '✓ Koblet til' : '';
-    statusEl.style.color = '#6fcf97';
-  }
-  if (teamsUrl) showTeamsMasked(teamsUrl); else hideTeamsMasked();
-  updateSidebarMini();
-}
-
-function initTeams() {
-  const inp = document.getElementById('teams-input');
-  const statusEl = document.getElementById('teams-status');
-  if (teamsUrl) {
-    inp.value = teamsUrl;
-    statusEl.textContent = '✓ Koblet til';
-    statusEl.style.color = '#6fcf97';
-    showTeamsMasked(teamsUrl);
-  }
-  document.getElementById('teams-reveal-btn').addEventListener('click', hideTeamsMasked);
-  document.getElementById('teams-save-btn').addEventListener('click', () => {
-    setTeamsUrl(inp.value);
-    statusEl.textContent = teamsUrl ? '✓ Lagret' : 'Fjernet';
-    statusEl.style.color = '#6fcf97';
-    setTimeout(() => { statusEl.textContent = teamsUrl ? '✓ Koblet til' : ''; }, 2000);
-  });
-
-  document.getElementById('teams-test-btn').addEventListener('click', async () => {
-    const url = teamsUrl || inp.value.trim();
-    if (!url) { statusEl.textContent = '✗ Ingen URL'; statusEl.style.color = '#f28787'; return; }
-    statusEl.textContent = 'Sender…';
-    statusEl.style.color = 'var(--sidebar-2)';
-    try {
-      const r = await fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          webhookUrl: url,
-          title: 'Test fra NewsWeb Monitor',
-          issuer: 'TEST',
-          issuerName: 'NewsWeb Monitor',
-          category: 'Test',
-          time: new Date().toLocaleTimeString('no-NO', {hour:'2-digit',minute:'2-digit'}),
-          messageId: ''
-        })
-      });
-      statusEl.textContent = r.ok ? '✓ Sendt' : '✗ Feil';
-      statusEl.style.color = r.ok ? '#6fcf97' : '#f28787';
-    } catch(e) {
-      statusEl.textContent = '✗ Feil';
-      statusEl.style.color = '#f28787';
-    }
-    setTimeout(() => { statusEl.textContent = teamsUrl ? '✓ Koblet til' : ''; statusEl.style.color = '#6fcf97'; }, 3000);
-  });
-
-  // Vis modal hvis ingen profil er valgt ennå
-  if (!userProfile) {
+function initOnboarding() {
+  // Vis modal kun hvis ingen desk er valgt ennå
+  if (!userDesk) {
     document.getElementById('modal').classList.remove('hidden');
     buildProfileGrid();
   }
 
   function buildProfileGrid() {
-    const profiles = [
-      { key: 'finanswatch',  label: 'FinansWatch' },
-      { key: 'techwatch',    label: 'TechWatch' },
-      { key: 'energiwatch',  label: 'EnergiWatch' },
-      { key: 'eiendomswatch',label: 'EiendomsWatch' },
-      { key: 'handelswatch', label: 'HandelsWatch' },
-      { key: 'medwatch',     label: 'MedWatch' },
-      { key: 'matvarewatch', label: 'MatvareWatch' },
-    ];
     const grid = document.getElementById('profile-grid');
     let selected = null;
-    profiles.forEach(p => {
+    DESK_LIST.forEach(p => {
       const btn = document.createElement('button');
       btn.textContent = p.label;
       btn.style.cssText = `font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.04em;padding:9px 12px;border-radius:var(--radius);border:1px solid var(--border-hi);background:var(--bg);color:var(--text-2);cursor:pointer;transition:all 0.15s;text-align:left;`;
@@ -2430,7 +2238,7 @@ function initTeams() {
         const startBtn = document.getElementById('modal-start');
         startBtn.disabled = false;
         startBtn.style.opacity = '1';
-        startBtn.textContent = `Start ${p.label} →`;
+        startBtn.textContent = `Vis ${p.label} →`;
       });
       grid.appendChild(btn);
     });
@@ -2446,120 +2254,16 @@ function initTeams() {
   });
 
   document.getElementById('modal-start').addEventListener('click', async () => {
-    const profileKey = window._getSelectedProfile?.();
-    if (profileKey) await setProfile(profileKey);
-    const url = document.getElementById('modal-webhook-input').value.trim();
-    if (url) setTeamsUrl(url);
+    const deskKey = window._getSelectedProfile?.();
     document.getElementById('modal').classList.add('hidden');
     localStorage.setItem('nwm_modal_seen', '1');
+    if (deskKey) await switchDesk(deskKey);
     openTutorial();
   });
-
-  document.getElementById('modal-webhook-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('modal-start').click();
-  });
-}
-
-async function notifyTeams(msg) {
-  if (!teamsUrl) return;
-  const cat = shortCat(msg.category?.[0]?.category_no || '');
-  const time = msg.publishedTime
-    ? new Date(msg.publishedTime).toLocaleTimeString('no-NO', {hour:'2-digit',minute:'2-digit'})
-    : '';
-  try {
-    await fetch('/api/notify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        webhookUrl: teamsUrl,
-        title: msg.title || '–',
-        issuer: msg.issuerSign || '',
-        issuerName: msg.issuerName || '',
-        category: cat,
-        time,
-        messageId: msg.messageId || msg.id || ''
-      })
-    });
-  } catch(e) {}
 }
 
 
-// ── Keyword dropdown toggle ──
-document.getElementById('kw-summary').addEventListener('click', () => {
-  const dd = document.getElementById('kw-dropdown');
-  dd.classList.toggle('open');
-  if (dd.classList.contains('open')) {
-    setTimeout(() => document.getElementById('keyword-input').focus(), 50);
-  }
-});
-
-// ── Autocomplete ──
-let issuerList = []; // fylles fra config
-
-function initAutocomplete(issuers) {
-  // Kombiner med statisk map
-  const staticIssuers = Object.entries(ISSUER_MAP).map(([symbol, name]) => ({symbol, name}));
-  const passedSymbols = new Set((issuers || []).map(i => i.symbol));
-  const extra = staticIssuers.filter(i => !passedSymbols.has(i.symbol));
-  issuerList = [...(issuers || []), ...extra];
-  const input = document.getElementById('keyword-input');
-  const sugs = document.getElementById('kw-suggestions');
-
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toUpperCase();
-    if (!q) { sugs.classList.remove('visible'); sugs.innerHTML = ''; return; }
-
-    const matches = issuerList
-      .filter(i => i.symbol && (
-        i.symbol.toUpperCase().startsWith(q) ||
-        i.name.toUpperCase().includes(q)
-      ))
-      .slice(0, 8);
-
-    if (!matches.length) { sugs.classList.remove('visible'); sugs.innerHTML = ''; return; }
-
-    sugs.innerHTML = '';
-    matches.forEach(i => {
-      const active = keywords.includes(i.symbol);
-      const row = document.createElement('div');
-      row.className = 'kw-suggestion' + (active ? ' active' : '');
-      row.innerHTML = `
-        <span class="kw-sug-ticker">${esc(i.symbol)}</span>
-        <span class="kw-sug-name">${esc(i.name)}</span>
-        <span class="kw-sug-check">✓</span>
-      `;
-      row.addEventListener('click', () => {
-        if (active) {
-          const idx = keywords.indexOf(i.symbol);
-          if (idx > -1) { keywords.splice(idx, 1); saveKeywords(); markCustom(); rebuildFeed(); }
-        } else {
-          addKeyword(i.symbol);
-        }
-        renderKeywords();
-        input.value = '';
-        input.dispatchEvent(new Event('input'));
-        input.focus();
-      });
-      sugs.appendChild(row);
-    });
-    sugs.classList.add('visible');
-  });
-
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { sugs.classList.remove('visible'); sugs.innerHTML = ''; input.value = ''; }
-    if (e.key === 'Enter') {
-      const first = sugs.querySelector('.kw-suggestion:not(.active)');
-      if (first) first.click();
-      else { sugs.classList.remove('visible'); sugs.innerHTML = ''; }
-    }
-  });
-
-  document.addEventListener('click', e => {
-    if (!document.getElementById('kw-dropdown').contains(e.target)) {
-      sugs.classList.remove('visible');
-    }
-  });
-}
+// (Keyword-redigering og autocomplete fjernet – søkeord styres nå på serveren.)
 
 
 // ── Profil-switcher ──
@@ -2573,20 +2277,22 @@ const PROFILE_LABELS = {
   medwatch:      'MedWatch'
 };
 
+const deskLabel = (key) => PROFILE_LABELS[key] || key || '–';
+
 function renderProfileSwitcher() {
   const grid = document.getElementById('profile-switcher-grid');
   const nameEl = document.getElementById('profile-name-display');
   if (!grid) return;
 
-  if (nameEl) nameEl.textContent = PROFILE_LABELS[userProfile] || '–';
+  if (nameEl) nameEl.textContent = deskLabel(userDesk);
 
   grid.innerHTML = '';
   Object.entries(PROFILE_LABELS).forEach(([key, label]) => {
     const btn = document.createElement('button');
-    btn.className = 'profile-btn' + (key === userProfile ? ' active' : '');
+    btn.className = 'profile-btn' + (key === userDesk ? ' active' : '');
     btn.textContent = label;
     btn.addEventListener('click', () => {
-      if (key === userProfile) return;
+      if (key === userDesk) return;
       showProfileConfirm(key, label);
     });
     grid.appendChild(btn);
@@ -2594,6 +2300,8 @@ function renderProfileSwitcher() {
 
   const btns = grid.querySelectorAll('.profile-btn');
   if (btns.length % 2 !== 0) btns[btns.length - 1].style.gridColumn = 'span 2';
+
+  updateDeskKeywordCount();
 }
 
 function showProfileConfirm(key, label) {
@@ -2624,7 +2332,7 @@ function showProfileConfirm(key, label) {
 
   overlay.querySelector('.profile-confirm-yes').addEventListener('click', async () => {
     dismiss();
-    await switchProfile(key);
+    await switchDesk(key);
   });
   overlay.querySelector('.profile-confirm-no').addEventListener('click', dismiss);
   overlay.addEventListener('click', e => { if (e.target === overlay) dismiss(); });
@@ -2632,83 +2340,49 @@ function showProfileConfirm(key, label) {
   _pendingConfirmTimer = setTimeout(dismiss, 5000);
 }
 
-async function switchProfile(key) {
-  if (!_cachedCfg?.profiles?.[key]) return;
-
+async function switchDesk(key) {
   const profileBlock = document.getElementById('profile-block');
   if (profileBlock) { profileBlock.style.opacity = '0.45'; profileBlock.style.pointerEvents = 'none'; }
 
-  // Oppdater profil
-  userProfile = key;
-  localStorage.setItem('nwm_profile', key);
-  kwCustom = false;
-  localStorage.removeItem('nwm_custom');
+  userDesk = key;
+  localStorage.setItem('nwm_desk', key);
 
-  const profile = _cachedCfg.profiles[key];
-  keywords    = profile.keywords    || [];
-  ignoreWords = profile.ignoreWords || [];
-  saveKeywords();
-  saveIgnore();
-  localStorage.setItem('nwm_kw_version', String(profile.version));
-  kwVersion = profile.version;
-
-  // Nullstill feed og seenIds
-  allMsgs = [];
-  seenIds = new Set();
-  localStorage.removeItem('nwm_seen');
-  hitCount = 0;
+  // Nullstill feed-tilstand
+  seenHitIds = new Set();
+  hitCount = 0; dailyHitCount = 0;
   const hcEl = document.getElementById('hit-counter');
   if (hcEl) { hcEl.textContent = ''; hcEl.classList.remove('visible'); }
 
-  renderKeywords();
-  renderIgnore();
   renderProfileSwitcher();
 
-  // Last dagens treff for ny profil
-  setStatus('', 'Laster ' + (PROFILE_LABELS[key] || key) + '…');
-  const todayMsgs = await fetchToday();
-  allMsgs = todayMsgs;
-  todayMsgs.forEach(msg => {
-    seenIds.add(String(msg.messageId || msg.id || msg.title || ''));
-  });
-  localStorage.setItem('nwm_seen', JSON.stringify([...seenIds].slice(-500)));
-
-  // Bygg feed
-  hitCount = 0; dailyHitCount = 0;
-  clearFeedAnimated(() => {
-    const hits = todayMsgs.filter(matches);
-    hits.sort((a, b) => new Date(a.publishedTime) - new Date(b.publishedTime));
-    hits.forEach(msg => addToFeed(msg, true));
-    if (hitCount === 0) showEmptyState();
-  });
-  setStatus('live', 'Live');
+  setStatus('', 'Laster ' + deskLabel(key) + '…');
+  try {
+    await loadDeskFeed();
+    setStatus('live', 'Live');
+    hideError();
+  } catch (err) {
+    setStatus('error', 'Feil');
+    showError(err.message);
+  }
   if (profileBlock) { profileBlock.style.opacity = ''; profileBlock.style.pointerEvents = ''; }
 }
 
 
-// ── Ticker-side ──
+// ── Ticker-side (server-drevet via /api/tickers) ──
 let _tickerActiveProfile = 'all';
 let _tickerQuery = '';
+let _tickerData = null;   // { desks, tickers } fra serveren
 
 async function openTickerPage() {
   document.getElementById('ticker-page').classList.add('visible');
-
-  // Hvis issuers ikke er lastet ennå, hent direkte fra NewsWeb i browser
-  if (!_cachedCfg?.issuers?.length) {
-    try {
-      const r = await fetch('https://api3.oslo.oslobors.no/v1/newsreader/issuers');
-      if (r.ok) {
-        const data = await r.json();
-        const issuers = (data.data?.issuers || [])
-          .filter(i => i.isActive === 1 && i.symbol && i.name)
-          .map(i => ({ symbol: i.symbol, name: i.name }));
-        if (!_cachedCfg) _cachedCfg = {};
-        _cachedCfg.issuers = issuers;
-        initAutocomplete(issuers);
-      }
-    } catch(e) {}
+  const content = document.getElementById('ticker-content');
+  if (!_tickerData) content.innerHTML = '<div class="ticker-empty">Laster…</div>';
+  try {
+    _tickerData = await fetchTickers();
+  } catch (e) {
+    content.innerHTML = '<div class="ticker-empty">Kunne ikke laste ticker-oversikt: ' + esc(e.message) + '</div>';
+    return;
   }
-
   renderTickerPage();
   setTimeout(() => document.getElementById('ticker-search').focus(), 50);
 }
@@ -2717,49 +2391,42 @@ function closeTickerPage() {
   document.getElementById('ticker-page').classList.remove('visible');
 }
 
+// Liten, diskret aktivitetsteller bak selskapsnavnet (bevarer to-kolonne-designet).
+function tickerCountBadge(t) {
+  return t.count ? ` <span style="color:var(--text-3);font-weight:400">· ${t.count} i dag</span>` : '';
+}
+
 function renderTickerPage() {
-  if (!_cachedCfg?.profiles) return;
+  if (!_tickerData) return;
   const content = document.getElementById('ticker-content');
   const q = _tickerQuery.toUpperCase();
-  const profiles = _cachedCfg.profiles;
-  const issuerMap = {};
-  Object.assign(issuerMap, ISSUER_MAP);
-  (_cachedCfg.issuers || []).forEach(i => { issuerMap[i.symbol] = i.name; });
+  let rows = _tickerData.tickers.slice();
 
-  // Bygg flat liste av alle tickers med profil-tag
-  let allRows = [];
-  Object.entries(profiles).forEach(([key, profile]) => {
-    (profile.keywords || []).forEach(sym => {
-      allRows.push({ sym, name: issuerMap[sym] || '', profile: key, label: profile.label });
-    });
-  });
-
-  // Filtrer på profil
+  // Filtrer på desk
   if (_tickerActiveProfile !== 'all') {
-    allRows = allRows.filter(r => r.profile === _tickerActiveProfile);
+    rows = rows.filter(r => r.desks.includes(_tickerActiveProfile));
   }
-
   // Filtrer på søk
   if (q) {
-    allRows = allRows.filter(r =>
-      r.sym.toUpperCase().includes(q) || r.name.toUpperCase().includes(q)
+    rows = rows.filter(r =>
+      r.ticker.toUpperCase().includes(q) || (r.name || '').toUpperCase().includes(q)
     );
   }
 
-  if (!allRows.length) {
+  if (!rows.length) {
     content.innerHTML = '<div class="ticker-empty">Ingen tickers matcher søket.</div>';
     return;
   }
 
-  // Grupper per profil hvis "Alle" er valgt
+  // Gruppert per desk når "Alle" er valgt og ingen søk
   if (_tickerActiveProfile === 'all' && !q) {
     let html = '';
-    Object.entries(profiles).forEach(([key, profile]) => {
-      const rows = allRows.filter(r => r.profile === key);
-      if (!rows.length) return;
+    Object.entries(PROFILE_LABELS).forEach(([key, label]) => {
+      const deskRows = rows.filter(r => r.desks.includes(key));
+      if (!deskRows.length) return;
       html += `<div class="ticker-section-title">
-        ${esc(profile.label)}
-        <span class="ticker-section-count">${rows.length}</span>
+        ${esc(label)}
+        <span class="ticker-section-count">${deskRows.length}</span>
       </div>
       <table class="ticker-table">
         <thead><tr>
@@ -2767,31 +2434,32 @@ function renderTickerPage() {
           <th>Selskap</th>
         </tr></thead>
         <tbody>`;
-      rows.forEach(r => {
+      deskRows.forEach(r => {
         html += `<tr>
-          <td><span class="ticker-sym">${esc(r.sym)}</span></td>
-          <td class="ticker-name">${esc(r.name || '–')}</td>
+          <td><span class="ticker-sym">${esc(r.ticker)}</span></td>
+          <td class="ticker-name">${esc(r.name || '–')}${tickerCountBadge(r)}</td>
         </tr>`;
       });
       html += '</tbody></table>';
     });
     content.innerHTML = html;
   } else {
-    // Flat tabell med profil-kolonne ved søk
+    // Flat tabell med desk-kolonne ved søk/filter
     let html = `<table class="ticker-table">
       <thead><tr>
         <th style="width:100px">Ticker</th>
         <th>Selskap</th>
-        <th style="width:140px">Desk</th>
+        <th style="width:200px">Desk</th>
       </tr></thead><tbody>`;
-    allRows.forEach(r => {
+    rows.forEach(r => {
       const nameHl = q
-        ? esc(r.name || '–').replace(new RegExp('(' + q + ')', 'gi'), '<mark>$1</mark>')
+        ? esc(r.name || '–').replace(new RegExp('(' + escRe(q) + ')', 'gi'), '<mark>$1</mark>')
         : esc(r.name || '–');
+      const tags = r.desks.map(k => `<span class="ticker-profile-tag">${esc(deskLabel(k))}</span>`).join(' ');
       html += `<tr>
-        <td><span class="ticker-sym">${esc(r.sym)}</span></td>
-        <td class="ticker-name">${nameHl}</td>
-        <td><span class="ticker-profile-tag">${esc(r.label)}</span></td>
+        <td><span class="ticker-sym">${esc(r.ticker)}</span></td>
+        <td class="ticker-name">${nameHl}${tickerCountBadge(r)}</td>
+        <td>${tags}</td>
       </tr>`;
     });
     html += '</tbody></table>';
@@ -2890,9 +2558,10 @@ function clearFeedAnimated(cb) {
 }
 
 // ── Issuer name lookup (for tooltips) ──
+// Primært fra serverens issuer-cache (/api/tickers), med statisk map som offline-fallback.
 function getIssuerName(symbol) {
-  const found = issuerList.find(i => i.symbol.toUpperCase() === symbol.toUpperCase());
-  return found?.name || ISSUER_MAP[symbol.toUpperCase()] || '';
+  const s = (symbol || '').toUpperCase();
+  return issuerNames[s] || ISSUER_MAP[s] || '';
 }
 
 // ── Push ──
@@ -2906,82 +2575,38 @@ document.getElementById('toggle-push').addEventListener('change', async e => {
 document.getElementById('toggle-sound').addEventListener('change', e => { soundEnabled = e.target.checked; updateSidebarMini(); });
 document.getElementById('btn-test-sound').addEventListener('click', () => { playPing(); });
 
-// ── Match & highlight ──
-function matches(msg) {
-  const issuer = (msg.issuerSign || '').toUpperCase().trim();
-
-  // Kun eksakt match på issuerSign – ingen fritekst-matching
-  const hit = keywords.some(kw => issuer === kw.toUpperCase().trim());
-  if (!hit) return false;
-
-  // Ignore-ord sjekkes som substring mot tittel
-  const fullText = ((msg.title || '') + ' ' + (msg.issuerSign || '') + ' ' + (msg.issuerName || '')).toLowerCase();
-  if (ignoreWords.some(ig => fullText.includes(ig.toLowerCase()))) return false;
-
-  return true;
-}
-
 function highlight(text) {
   return esc(text);
 }
 
-// ── Feed rebuild – kjøres ved kw-endring ──
-function rebuildFeed() {
-  hitCount = 0; dailyHitCount = 0;
-  const hcEl = document.getElementById('hit-counter'); hcEl.textContent = ''; hcEl.classList.remove('visible');
-  clearFeedAnimated(() => {
-    const hits = allMsgs.filter(matches);
-    hits.sort((a, b) => new Date(a.publishedTime) - new Date(b.publishedTime));
-    hits.forEach(msg => addToFeed(msg, true));
-    if (hitCount === 0) showEmptyState();
-  });
-}
-
-// ── Hent dagens meldinger (API støtter ikke paginering, henter én batch) ──
-async function fetchToday() {
-  const todayStr = new Date().toLocaleDateString('no-NO');
-  try {
-    const res = await fetch(API_URL + '?_=' + Date.now());
-    if (!res.ok) return [];
-    const data = await res.json();
-    const msgs = data.messages || [];
-    return msgs.filter(msg => {
-      return new Date(msg.publishedTime).toLocaleDateString('no-NO') === todayStr;
-    });
-  } catch(e) { return []; }
-}
-
-// ── Poll (kun nye siden sist) ──
+// ── Poll: hent dagens treff for valgt desk og vis nye ──
+// All matching og Teams-varsling skjer på serveren. Dette er kun en lese-oppdatering.
 async function poll() {
+  if (!userDesk) return;
   try {
-    const res = await fetch(API_URL + '?_=' + Date.now());
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
+    const hits = await fetchHits(userDesk);
     hideError(); setStatus('live', 'Live');
     document.getElementById('last-check').textContent =
       'Siste sjekk: ' + new Date().toLocaleTimeString('no-NO');
 
-    const messages = data.messages || [];
-    const hits = [];
-
-    messages.forEach(msg => {
-      const id = String(msg.messageId || msg.id || msg.title || Math.random());
-      if (seenIds.has(id)) return;
-      seenIds.add(id);
-      allMsgs.push(msg); // legg til i dagens buffer
-      if (matches(msg)) hits.push(msg);
+    const fresh = [];
+    hits.forEach(h => {
+      const k = hitKey(h);
+      if (seenHitIds.has(k)) return;
+      seenHitIds.add(k);
+      fresh.push(h);
     });
 
-    localStorage.setItem('nwm_seen', JSON.stringify([...seenIds].slice(-500)));
+    // Dagsteller speiler serverens fasit for valgt desk
+    dailyHitCount = hits.length;
+    const dc = document.getElementById('daily-count'); if (dc) dc.textContent = dailyHitCount;
 
-    if (hits.length) {
-      hits.sort((a, b) => new Date(a.publishedTime) - new Date(b.publishedTime));
-      hits.forEach(msg => addToFeed(msg, false));
+    if (fresh.length) {
+      fresh.sort((a, b) => (a.publishedMs || 0) - (b.publishedMs || 0));
+      fresh.forEach(msg => addToFeed(msg, false));
       if (soundEnabled) playPing();
       if (document.hidden) startBlink(hitCount);
-      hits.forEach(msg => notifyTeams(msg));
-      if (pushEnabled) hits.forEach(msg =>
+      if (pushEnabled) fresh.forEach(msg =>
         new Notification('NewsWeb: ' + (msg.issuerSign || 'Treff'), { body: msg.title || '–' })
       );
     }
@@ -3012,12 +2637,13 @@ function shortCat(name) {
 // ── Feed ──
 function addToFeed(msg, silent) {
   hitCount++;
-  if (!silent) dailyHitCount++;
   const hc = document.getElementById('hit-counter');
   hc.textContent = hitCount + ' treff'; hc.classList.add('visible');
   hc.classList.remove('bump'); void hc.offsetWidth; hc.classList.add('bump');
-  const dc = document.getElementById('daily-count');
-  if (dc) { dc.textContent = dailyHitCount; dc.classList.remove('bump'); void dc.offsetWidth; dc.classList.add('bump'); }
+  if (!silent) {
+    const dc = document.getElementById('daily-count');
+    if (dc) { dc.textContent = dailyHitCount; dc.classList.remove('bump'); void dc.offsetWidth; dc.classList.add('bump'); }
+  }
 
   const feed = document.getElementById('feed');
   const empty = feed.querySelector('.empty-state');
@@ -3028,7 +2654,8 @@ function addToFeed(msg, silent) {
     ? new Date(time).toLocaleTimeString('no-NO', {hour:'2-digit',minute:'2-digit',second:'2-digit'})
     : new Date().toLocaleTimeString('no-NO');
   const msgId = msg.messageId || msg.id || '';
-  const cat = shortCat(msg.category?.[0]?.category_no || '');
+  // Serveren lagrer category som tekst; eldre data kan være NewsWeb-array.
+  const cat = shortCat(typeof msg.category === 'string' ? msg.category : (msg.category?.[0]?.category_no || ''));
 
   const item = document.createElement('div');
   item.className = silent ? 'item' : 'item fresh';
@@ -3112,7 +2739,7 @@ function setStatus(type, text) {
 function showError(msg) {
   const b = document.getElementById('error-banner');
   b.style.display = 'block';
-  b.textContent = `⚠ Proxy-feil: ${msg}`;
+  b.textContent = `⚠ Server-feil: ${msg} (sjekk at API_BASE peker på serveren)`;
 }
 function hideError() { document.getElementById('error-banner').style.display = 'none'; }
 
@@ -3158,14 +2785,22 @@ document.querySelectorAll('.tutorial-dot').forEach(d =>
   d.addEventListener('click', () => goToSlide(Number(d.dataset.s)))
 );
 
-// ── Sidebar mini ──
+// ── Sidebar mini (kun lydstatus i kollapset sidebar) ──
 function updateSidebarMini() {
-  const kwEl    = document.getElementById('sidebar-mini-kw');
   const soundEl = document.getElementById('sidebar-mini-sound');
-  const teamsEl = document.getElementById('sidebar-mini-teams');
-  if (kwEl)    kwEl.textContent = keywords.length;
   if (soundEl) soundEl.classList.toggle('on', soundEnabled);
-  if (teamsEl) teamsEl.classList.toggle('on', !!teamsUrl);
+}
+
+// Antall tickers valgt desk overvåker (fra /api/tickers, hvis lastet).
+function updateDeskKeywordCount() {
+  const el = document.getElementById('kw-count-badge');
+  if (!el) return;
+  if (_tickerData && userDesk) {
+    const n = _tickerData.tickers.filter(t => t.desks.includes(userDesk)).length;
+    el.textContent = n ? `(${n})` : '';
+  } else {
+    el.textContent = '';
+  }
 }
 
 // ── Toast med angre ──
@@ -3183,30 +2818,6 @@ function toastWithUndo(message, onUndo, duration = 5000) {
   setTimeout(() => { if (!done) t.remove(); }, duration);
 }
 
-// ── Teams URL masking ──
-function showTeamsMasked(url) {
-  const input  = document.getElementById('teams-input');
-  const masked = document.getElementById('teams-masked');
-  const hostEl = document.getElementById('teams-masked-host');
-  if (!input || !masked || !hostEl) return;
-  let display = url;
-  try { display = new URL(url).hostname; } catch(e) {
-    display = url.length > 32 ? url.slice(0, 30) + '…' : url;
-  }
-  hostEl.textContent = display;
-  input.style.display = 'none';
-  masked.classList.add('visible');
-}
-
-function hideTeamsMasked() {
-  const input  = document.getElementById('teams-input');
-  const masked = document.getElementById('teams-masked');
-  if (!input || !masked) return;
-  input.style.display = '';
-  masked.classList.remove('visible');
-  setTimeout(() => input.focus(), 10);
-}
-
 // ── Utils ──
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -3215,64 +2826,16 @@ function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 // ── Init ──
 async function init() {
-  const _cfg = await fetchConfigRaw();
-  // Hent issuers direkte fra NewsWeb i browser (unngår Vercel server-blokkering)
-  try {
-    const ir = await fetch('https://api3.oslo.oslobors.no/v1/newsreader/issuers');
-    if (ir.ok) {
-      const idata = await ir.json();
-      const issuers = (idata.data?.issuers || [])
-        .filter(i => i.isActive === 1 && i.symbol && i.name)
-        .map(i => ({ symbol: i.symbol, name: i.name }));
-      if (_cachedCfg) _cachedCfg.issuers = issuers;
-      initAutocomplete(issuers);
-    }
-  } catch(e) { console.warn('Issuers ikke tilgjengelig:', e.message); }
-
-  // Sikre at keywords er lastet FØR fetchToday – unngå race condition
-  if (keywords.length === 0 && !kwCustom && userProfile && _cfg?.profiles?.[userProfile]) {
-    const profile = _cfg.profiles[userProfile];
-    keywords    = profile.keywords    || [];
-    ignoreWords = profile.ignoreWords || [];
-    saveKeywords();
-    saveIgnore();
-    localStorage.setItem('nwm_kw_version', String(profile.version));
-    kwVersion = profile.version;
-  } else {
-    await fetchConfig();
-  }
-
-  renderKeywords();
-  renderIgnore();
-  renderProfileSwitcher();
-  initTeams();
-  updateSidebarMini();
   startClock();
+  renderProfileSwitcher();
+  updateSidebarMini();
+  initOnboarding();
   showEmptyState();
-  setStatus('', 'Laster dagens meldinger…');
 
-  // Hent alle dagens meldinger først
-  const todayMsgs = await fetchToday();
-  allMsgs = todayMsgs;
+  // Forhåndshent ticker-data for navn + søkeord-teller (stille; feiler greit).
+  fetchTickers().then(updateDeskKeywordCount).catch(() => {});
 
-  // Merk alle som sett så poll() ikke varsler på dem
-  todayMsgs.forEach(msg => {
-    const id = String(msg.messageId || msg.id || msg.title || '');
-    seenIds.add(id);
-  });
-  localStorage.setItem('nwm_seen', JSON.stringify([...seenIds].slice(-500)));
-
-  // Bygg feed stille (ingen lyd/blink for historikk)
-  const hits = todayMsgs.filter(matches);
-  hits.sort((a, b) => new Date(a.publishedTime) - new Date(b.publishedTime));
-  hits.forEach(msg => addToFeed(msg, true));
-  if (hitCount === 0) showEmptyState();
-  dailyHitCount = hitCount; // seed daily counter with today's historical hits
-  const dcInit = document.getElementById('daily-count'); if (dcInit) dcInit.textContent = dailyHitCount;
-
-  setStatus('live', 'Live');
-
-  // Init interval slider
+  // Init interval slider (styrer hvor ofte dashboardet oppdaterer seg)
   const slider = document.getElementById('poll-slider');
   const intervalDisplay = document.getElementById('interval-display');
   slider.value = pollMs / 1000;
@@ -3285,8 +2848,21 @@ async function init() {
     startCountdown();
   });
 
-  // Start polling for nye
-  poll();
+  // Last dagens treff for valgt desk (hvis noen er valgt)
+  if (userDesk) {
+    setStatus('', 'Laster ' + deskLabel(userDesk) + '…');
+    try {
+      await loadDeskFeed();
+      setStatus('live', 'Live');
+    } catch (err) {
+      setStatus('error', 'Feil');
+      showError(err.message);
+    }
+    poll();
+  } else {
+    setStatus('', 'Velg desk');
+  }
+
   startCountdown();
   startPolling();
 }
