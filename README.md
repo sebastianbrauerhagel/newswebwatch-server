@@ -176,6 +176,41 @@ pm2 restart newsweb-monitor     # after editing desks-config.json or env
 The SQLite DB lives at `data/newsweb.db` (WAL mode). Back it up with a simple cron copy if
 you want history retained across server rebuilds.
 
+## Deployment (Docker — no sudo required)
+
+On servers where you only have Docker access (member of the `docker` group, no general
+sudo), use the bundled `Dockerfile` + `docker-compose.yml`. Node, `build-essential`/`python3`
+for the native `better-sqlite3` build, and all npm deps are installed **inside the image** —
+nothing is installed on the host.
+
+```bash
+# 1. Get the code onto the server and enter this dir
+cd newswebwatch-server
+
+# 2. Config (both are gitignored / not baked into the image)
+cp .env.example .env                              # set ALLOWED_ORIGINS to your Vercel origin
+cp desks-config.example.json desks-config.json    # paste the real Teams webhooks
+
+# 3. Build + run (detached, restarts on crash/reboot)
+docker compose up -d --build
+
+# 4. Verify
+docker compose ps
+docker compose logs -f                  # live logs
+curl http://localhost:3000/api/health   # -> {"ok":true,...}
+```
+
+Notes:
+- The container binds `0.0.0.0` internally and publishes host port `3000` (change the left
+  side of `ports:` in `docker-compose.yml`, e.g. `"8080:3000"`, if 3000 is taken).
+- SQLite data persists in the named volume `newsweb-data` across rebuilds. Back it up with
+  `docker run --rm -v newsweb-data:/data -v "$PWD":/backup busybox tar czf /backup/newsweb-data.tgz -C /data .`
+- After editing `desks-config.json` or `.env`: `docker compose restart` (config changes) or
+  `docker compose up -d --build` (code changes).
+- TLS / public hostname: either put it behind whatever shared reverse proxy the server
+  already runs, or front this container with a proxy container (e.g. Caddy/Traefik) — no host
+  Nginx/sudo needed.
+
 ## Dashboard (Vercel)
 
 `index.html` is now a **read-only dashboard**. It no longer matches, edits keywords, or

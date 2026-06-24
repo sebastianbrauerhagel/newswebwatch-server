@@ -1,0 +1,20 @@
+node_modules
+npm-debug.log
+
+# Secrets and local runtime state — never bake into the image.
+.env
+desks-config.json
+data/
+*.log
+
+# Vercel dashboard + serverless functions are deployed separately, not in this image.
+api/
+index.html
+vercel.json
+
+# VCS / editor / docs noise.
+.git
+.gitignore
+README.md
+ecosystem.config.cjs
+deploy/

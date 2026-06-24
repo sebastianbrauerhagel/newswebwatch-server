@@ -1,0 +1,33 @@
+services:
+  newsweb-monitor:
+    build: .
+    image: newsweb-monitor
+    container_name: newsweb-monitor
+    restart: unless-stopped
+
+    # App config (PORT, POLL_INTERVAL_MS, ALLOWED_ORIGINS, etc.) comes from .env.
+    # Copy .env.example to .env and fill it in before the first deploy.
+    env_file:
+      - .env
+
+    # These override anything in .env to match the container layout:
+    #  - HOST must be 0.0.0.0 so the published port actually reaches the app
+    #    (the app defaults to 127.0.0.1, which is unreachable from outside the container).
+    #  - DB_PATH points at the mounted volume so SQLite data survives redeploys.
+    environment:
+      HOST: 0.0.0.0
+      DB_PATH: /data/newsweb.db
+
+    # Publish to the host. Change the left side (host port) if 3000 is taken,
+    # e.g. "8080:3000". A separate reverse proxy / TLS can sit in front of this.
+    ports:
+      - "3000:3000"
+
+    volumes:
+      # Persistent SQLite database.
+      - newsweb-data:/data
+      # Desk config holds the secret Teams webhooks — mounted read-only, not baked in.
+      - ./desks-config.json:/app/desks-config.json:ro
+
+volumes:
+  newsweb-data:
